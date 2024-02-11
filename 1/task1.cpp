@@ -44,10 +44,15 @@ int main(int argc, char* argv[]){
         ifstream file;
         file.open(file_name);
         while(!file){
-            cout<<"This file doesn't exist. Try again\n";
+            cout<<"This file doesn't exist. Try again\nIf you want to finish program, type 'quit'\n";
             file.close();
             getline(cin, file_name);
-            file.open(file_name);
+            if(file_name == "quit"){
+                return 0;
+            }
+            else{
+                file.open(file_name);
+            }
         }
         getline(file, text);
         count_pairs(text);
