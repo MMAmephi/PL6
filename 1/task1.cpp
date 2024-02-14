@@ -8,11 +8,11 @@ using namespace std;
 void count_pairs(string text){
     map <string, int> pairs;
 
-    for(int i=0; i < size(text)-1; i++){
+    for(int i=0; i < text.size()-1; i++){
         pairs[text.substr(i, 2)] =0;
     }
 
-    for(int i=0; i < size(text)-1; i++){
+    for(int i=0; i < text.size()-1; i++){
         pairs[text.substr(i, 2)]++;
     }
 
