@@ -12,6 +12,7 @@ public:
     Matrix(int row, int col);
     Matrix(int row, int col, double* arr);
     Matrix(std::string file_in);
+    Matrix(const Matrix& other);
     ~Matrix();
 
     double get(int i, int j);
@@ -20,8 +21,8 @@ public:
 
     void change(int i, int j, double value);
 
-    Matrix operator+(Matrix other);
-    Matrix operator*(Matrix other);
+    Matrix operator+(const Matrix& other);
+    Matrix operator*(const Matrix& other);
     Matrix operator+(double value);
     Matrix operator*(double value);
 };

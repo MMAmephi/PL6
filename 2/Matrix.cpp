@@ -26,6 +26,18 @@ Matrix::Matrix(int n, int m, double* arr) {
     }
 };
 
+Matrix::Matrix(const Matrix& other){
+	n_row = other.n_row;
+	m_col = other.m_col;
+	data = new double*[n_row];
+	for(int i = 0 ; i < n_row; ++i){
+		data[i] = new double[m_col];
+		for(int j = 0; j < m_col; ++j){
+			data[i][j] = other.data[i][j];
+		}
+	}
+};
+
 Matrix::~Matrix() {
     if (data != nullptr) {
         for (int i = 0; i < n_row; ++i) {
@@ -49,6 +61,9 @@ Matrix::Matrix(std::string filename) {
         file.close();
     } else {
         std::cerr << "Error: Unable to open file." << std::endl;
+	data = nullptr;
+	n_row = 0;
+	m_col = 0;
     }
 };
 
@@ -90,12 +105,12 @@ void Matrix::change(int i, int j, double value) {
     if (i >= 0 && i < n_row && j >= 0 && j < m_col) {
         data[i][j] = value;
     } else {
-        std::cout << value;
+        std::cout << value << std::endl;
         std::cerr << "Error: Index out of bounds." << std::endl;
     }
 };
 
-Matrix Matrix::operator+(Matrix other) {
+Matrix Matrix::operator+(const Matrix& other) {
     if (n_row != other.n_row || m_col != other.m_col) {
         std::cerr << "Error: Matrix dimensions do not match for addition." << std::endl;
         return Matrix();
@@ -109,7 +124,7 @@ Matrix Matrix::operator+(Matrix other) {
     return result;
 };
 
-Matrix Matrix::operator*(Matrix other){
+Matrix Matrix::operator*(const Matrix& other){
     if (m_col != other.n_row) {
             std::cerr << "Error: Matrix dimensions do not match for multiplication." << std::endl;
             return Matrix();
